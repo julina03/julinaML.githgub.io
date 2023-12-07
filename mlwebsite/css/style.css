@@ -1,0 +1,558 @@
+
+
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body */
+body {
+  min-height: auto;
+  background: hsl(220, 10%, 12%);
+}
+
+/* .flip-card-container */
+.flip-card-container {
+  --hue: 150;
+  --primary: hsl(var(--hue), 50%, 50%);
+  --white-1: hsl(0, 0%, 90%);
+  --white-2: hsl(0, 0%, 80%);
+  --dark: hsl(var(--hue), 25%, 10%);
+  --grey: hsl(177, 93%, 48%);
+  width: 300px;
+  height: 450px;
+  margin: 40px;
+  perspective: 1000px;
+}
+
+/* .flip-card */
+.flip-card {
+  width: inherit;
+  height: inherit;
+
+  position: relative;
+  transform-style: preserve-3d;
+  transition: .6s .1s;
+}
+
+/* hover and focus-within states */
+.flip-card-container:hover .flip-card,
+.flip-card-container:focus-within .flip-card {
+  transform: scale(1.1);
+}
+
+/* .card-... */
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+
+  background: var(--dark);
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  backface-visibility: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .card-front */
+.card-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+/* .card-back */
+.card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* figure */
+figure {
+  z-index: -1;
+}
+
+/* figure, .img-bg */
+figure,
+.img-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* img */
+figure > img {
+  height: 100%;
+  width: 100%;
+  border-radius: 24px;
+}
+
+/* figcaption */
+figcaption {
+  display: block;
+
+  width: auto;
+  margin-top: 12%;
+  padding: 8px 22px;
+
+  font-weight: bold;
+  line-height: 1.6;
+  letter-spacing: 2px;
+  word-spacing: 6px;
+  text-align: right;
+
+  position: absolute;
+  top: 0;
+  right: 12px;
+
+  color: var(--white-1);
+  background: hsla(var(--hue), 25%, 10%, .5);
+}
+
+/* .img-bg */
+.img-bg {
+  background: hsla(var(--hue), 25%, 10%, .5);
+}
+
+.card-front .img-bg {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.card-front .img-bg::before {
+  content: "";
+
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(18deg);
+
+  width: 100%;
+  height: 6px;
+  border: 1px solid var(--primary);
+  border-left-color: transparent;
+  border-right-color: transparent;
+
+  transition: .1s;
+}
+
+.card-back .img-bg {
+  clip-path: polygon(0 20%, 100% 40%, 100% 100%, 0 100%);
+}
+
+/* hover state */
+.flip-card-container:hover .card-front .img-bg::before {
+  width: 6px;
+  border-left-color: var(--primary);
+  border-right-color: var(--primary);
+}
+
+/* ul */
+ul {
+  padding-top: 50%;
+  margin: 0 auto;
+  width: 70%;
+  height: 100%;
+
+  list-style: none;
+  color: var(--white-1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* li */
+li {
+  width: 100%;
+  margin-top: 12px;
+  padding-bottom: 12px;
+
+  font-size: 14px;
+  text-align: center;
+
+  position: relative;
+}
+
+li:nth-child(2n) {
+  color: var(--white-2);
+}
+
+li:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: currentColor;
+  opacity: .2;
+}
+
+/* button */
+button {
+  font-family: inherit;
+  font-weight: bold;
+  color: var(--white-1);
+
+  letter-spacing: 2px;
+
+  padding: 9px 20px;
+  border: 1px solid var(--grey);
+  border-radius: 1000px;
+  background: rgba(2, 6, 12, 0.603);
+  transition: .3s;
+
+  cursor: pointer;
+}
+
+button:hover,
+button:focus {
+  border-color: currentColor;
+  box-shadow: 0 1px 15px var(--grey);
+}
+
+button:active {
+  transform: translate(2px);
+}
+
+/* .design-container */
+.design-container {
+  --tr: 90;
+  --op: .5;
+
+  width: 100%;
+  height: 100%;
+
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+}
+
+/* .design */
+.design {
+  display: block;
+
+  background: var(--grey);
+  position: absolute;
+
+  opacity: var(--op);
+  transition: .3s;
+}
+
+.design--1,
+.design--2,
+.design--3,
+.design--4 {
+  width: 1px;
+  height: 100%;
+}
+
+.design--1,
+.design--2 {
+  top: 0;
+  transform: translateY(calc((var(--tr) - (var(--tr) * 2)) * 1%))
+}
+
+.design--1 {
+  left: 20%;
+}
+
+.design--2 {
+  left: 80%;
+}
+
+.design--3,
+.design--4 {
+  bottom: 0;
+  transform: translateY(calc((var(--tr) + (var(--tr) - var(--tr))) * 1%))
+}
+
+.design--3 {
+  left: 24%;
+}
+
+.design--4 {
+  left: 76%;
+}
+
+.design--5,
+.design--6,
+.design--7,
+.design--8 {
+  width: 100%;
+  height: 1px;
+}
+
+.design--5,
+.design--6 {
+  left: 0;
+  transform: translateX(calc((var(--tr) - (var(--tr) * 2)) * 1%));
+}
+
+.design--5 {
+  top: 41%;
+}
+
+.design--6 {
+  top: 59%;
+}
+
+.design--7,
+.design--8 {
+  right: 0;
+  transform: translateX(calc((var(--tr) + (var(--tr) - var(--tr))) * 1%))
+}
+
+.design--7 {
+  top: 44%;
+}
+
+.design--8 {
+  top: 56%;
+}
+
+/* states */
+button:hover+.design-container,
+button:active+.design-container,
+button:focus+.design-container {
+  --tr: 20;
+  --op: .7;
+}
+
+.abs-site-link {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  color: hsla(0, 0%, 100%, .6);
+  font-size: 16px;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  
+}
+
+.containerparallax {
+  text-align: center;
+  color: #f1eeee;
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+/*  this is where the magic happens:  */
+  background-attachment: fixed;
+  position: relative;
+}
+
+.containerparallax::after {
+  /* Set the content to an empty string */
+  content: "";
+  /* Set the position to absolute and the size to 100% */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Set the background color to black with 8% opacity */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.418), rgb(28, 30, 33));
+  /* Set the pointer-events to none to allow clicks through the pseudo-element */
+  pointer-events: none;
+}
+
+.containerparallax2 {
+  text-align: center;
+  color: #f1eeee;
+  width: 100%;
+  min-height: 200vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+/*  this is where the magic happens:  */
+  background-attachment: fixed;
+  position: relative;
+}
+
+.containerparallax2::after {
+  /* Set the content to an empty string */
+  content: "";
+  /* Set the position to absolute and the size to 100% */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Set the background color to black with 8% opacity */
+  background-image: linear-gradient(rgb(28, 30, 33),rgba(0, 0, 0, 0.418),rgba(0, 0, 0, 0.418), rgb(28, 30, 33));
+  /* Set the pointer-events to none to allow clicks through the pseudo-element */
+  pointer-events: none;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 3rem;
+  z-index: 1;
+}
+
+p {
+  max-width: 52ch;
+  line-height: 1.5;
+  padding: 1em;
+  z-index: 1;
+}
+
+a.triangle {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgb(255, 255, 255);
+  z-index: 1;
+}
+
+.rank{
+  width: 100%;
+  height: 200%;
+  background-color: rgb(28, 30, 33);
+  padding-top: 10vh;
+}
+
+
+.image-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  overflow: hidden; 
+}
+
+div.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  float: left; 
+  margin-left: 20px; 
+}
+
+.description {
+  font-style: italic;
+  color: #555;
+  overflow: hidden; 
+}
+
+.flip-card-container:hover */
+.flip-card-container:hover .flip-card {
+  transform: scale(1.05) rotateY(180deg);
+  transition: transform 0.6s 0.1s;
+}
+
+/* .flip-card-container:focus-within */
+.flip-card-container:focus-within .flip-card {
+  transform: scale(1.05) rotateY(180deg);
+  transition: transform 0.6s 0.1s;
+}
+
+/* .card-front:hover .img-bg::before */
+.card-front:hover .img-bg::before {
+  width: 6px;
+  border-left-color: var(--primary);
+  border-right-color: var(--primary);
+}
+
+/* .card-front:hover+.design-container, .card-front:active+.design-container, .card-front:focus+.design-container */
+.card-front:hover + .design-container,
+.card-front:active + .design-container,
+.card-front:focus + .design-container {
+  --tr: 20;
+  --op: .7;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: transparent;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 15px;
+  font-size: 18px;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  color: #00e1ff; /* Change the color on hover as desired */
+}
+
+/* Add a sticky class to the navbar when you scroll */
+.sticky {
+  background-color: rgba(255, 255, 255, 0.397); /* Set the background color when sticky */
+}
+
+/* Adjust the padding of the content to avoid being hidden by the fixed navbar */
+.content {
+  padding-top: 10px; /* Adjust this value based on your navbar height */
+}
+
+.about-section {
+  background-color: #fff;
+  padding: 50px 20px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.about-section div {
+  flex: 1;
+}
+
+.about-section h2 {
+  color: #333; /* Change the text color as needed */
+}
+
+.about-section p {
+  color: #666; /* Change the text color as needed */
+  font-size: 16px;
+  line-height: 1.5;
+}
